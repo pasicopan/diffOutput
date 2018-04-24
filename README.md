@@ -1,10 +1,17 @@
 # diffOutput  
 
-out put diff string in big text for uploading to server to save btye and time.
+easy wrapper for diff-match-patch, out put diff string in big text for uploading to server to save byte and time. eg. modifing the rich text.
 
-### usage  
+### install (not upload to npmjs.com yet, sad :P) 
 
 ```javascript
+  npm i -S diffOutput
+```
+
+### usage  
+```javascript
+
+
   async function test(){
 
     const text1 = 'adfasdfasfdasdfasdf';
@@ -13,17 +20,27 @@ out put diff string in big text for uploading to server to save btye and time.
     const timeout = 6000;
   
     const diffOutput = new window.DiffOutput(text1, timeout);// init
-    console.log('diffResult1 result=', diffResult1);
-    const diffResult1 = await diffOutput.outputFrom(text2);// diff from text1 to text2, return promise
-    const diffResult2 = await diffOutput.outputFrom(text3);// diff from text1 to text3, return promise
-    console.log('diffResult2 result=', diffResult2);
+    const diffResult12 = await diffOutput.outputFrom(text2);// diff from text1 to text2, work in webworker, return promise
+    console.log('diffResult12 result=', diffResult12);
+    const diffResult23 = await diffOutput.outputFrom(text3);// diff from text1 to text3, work in webworker, return promise
+    console.log('diffResult23 result=', diffResult23);
   }
   test();
 
 ```
 
+### dev  
+
+```javascript
+  npm run test
+```
+### build  
+
+```javascript
+  npm run build
+```
 ### common
-- if JSON.stringify(diffResult1).length > text2, diffResult1.resultString = text2;
+- if JSON.stringify(diffResult12.diff).length > text2, diffResult12.resultString = text2;
 
 ### ref
 - [google diff match patch](https://github.com/google/diff-match-patch)
