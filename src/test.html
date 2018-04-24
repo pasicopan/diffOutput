@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+  <TITLE>
+    <%= htmlWebpackPlugin.options.title %>
+  </TITLE>
+</HEAD>
+
+<BODY>
+  <H1>
+    <%= htmlWebpackPlugin.options.title %>
+  </H1>
+
+  <FORM action="#" onsubmit="return false;">
+    <TABLE WIDTH="100%">
+      <TR>
+        <TD WIDTH="50%">
+          <H3>Text Version 1:</H3>
+          <TEXTAREA ID="text1" STYLE="width: 100%" ROWS=10>This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader.This is a '''list of newspapers published by [[Journal Register Company]]'''.</TEXTAREA>
+        </TD>
+        <TD WIDTH="50%">
+          <H3>Text Version 2:</H3>
+
+          <TEXTAREA ID="text2" STYLE="width: 100%" ROWS=10>This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader.This is a '''list of newspapers published by [[Journal Register ABCompany]]'''.</TEXTAREA>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <P>
+      <INPUT TYPE="button" id="diffButton" onClick="launch();" VALUE="Compute Diff">
+    </P>
+    <p>
+      check log in console
+    </p>
+  </FORM>
+
+  <DIV ID="outputdiv"></DIV>
+
+</BODY>
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+
+  async function launch() {
+    var text1 = document.getElementById('text1').value;
+    var text2 = document.getElementById('text2').value;
+
+    const diffOutput = new DiffOutput(text1, 6000);
+    const diffResult = await diffOutput.outputFrom(text2);
+    console.log('diffResult result=', diffResult);
+    // const recoveryResult = await diffOutput.recovery(diffResult, text1);
+    // console.log('recoveryResult result=', recoveryResult);
+    var outputdiv = document.getElementById('outputdiv');
+    outputdiv.innerHTML = diffResult.resultString;
+
+  }
+</SCRIPT>
+
+</HTML>
